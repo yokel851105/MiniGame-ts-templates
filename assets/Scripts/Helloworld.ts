@@ -1,6 +1,9 @@
+
 import { EventMng } from "./framework/messenger/EventManager";
 import { EventName } from "./framework/messenger/EventName";
 import { UT } from "./framework/util/UtilTool";
+import { HttpNetRequest } from "./framework/net/HttpNetRequest";
+const i18n = require('LanguageData');
 
 const { ccclass, property } = cc._decorator;
 
@@ -27,19 +30,32 @@ export default class Helloworld extends cc.Component {
     start() {
         // init logic
         this.label.string = this.text;
-        this.testEventlabel.node.getComponent('LocalizedLabel').dataID = 'label_txt.event' ;
+        UT.changeLabeli18n(this.testEventlabel, 'event')
         UT.log(UT.geti18nStr(this.testEventlabel.string))
 
     }
 
     testUI(eventName: string, evenData: any) {
         var msg = evenData.msg;
-        UT.changeLabeli18n(this.testEventlabel,msg)
+        UT.changeLabeli18n(this.testEventlabel, msg)
         UT.log(this.testEventlabel.string)
-
     }
 
     touchBtnEvent() {
         this.testUi.active = true;
+        this.getPerformanceNow(() => {
+            UT.log('-----getPerformanceNow------')
+        })
+    }
+
+    getPerformanceNow(cb) {
+        HttpNetRequest.getPerformanceNow().then((res: any) => {
+            cb(res);
+            UT.jsonLog(res)
+            UT.log('---------' + res.data);
+
+        }).catch((res) => {
+            // UtilTool.jsonLog(res, ' checkoutVersion  ');
+        })
     }
 }

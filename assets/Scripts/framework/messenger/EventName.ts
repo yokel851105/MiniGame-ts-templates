@@ -6,7 +6,6 @@
  */
 
 export class EventName {
-
     public static testEvent: string = 'testEvent';
 
 

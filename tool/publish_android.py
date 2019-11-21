@@ -4,10 +4,11 @@ import shutil
 import stat
 # import oss2
 
-#1.cocos creator complie Wechat Game to Wechat_devtoolsWebPack_Demo/     python publish_wx.py          eAUNEwS03n02Ms0orufoFBFMF2RarwoN  Hdow30XfbJBkLWjRZaitoc9hGVtKKTLN
-os.system('/Applications/CocosCreator2.2.0.app/Contents/MacOS/CocosCreator --path ./ --build "platform=wechatgame;debug=false;md5Cache=true;appid=wxb93b1ad68145d0a7;orientation=landscape"');
+#1.cocos creator complie Wechat Game to Wechat_devtoolsWebPack_Demo/   python tool/publish_android.py  jsb-link  android
+os.system('/Applications/CocosCreator2.2.0.app/Contents/MacOS/CocosCreator --path ./ --build "platform=ios;debug=false;md5Cache=true;zipCompressJs=true;packageName=com.mzgame.bc;"');
 
-os.system('gulp tinypngWx')
+
+#os.system('gulp tinypngAnroid')
 
 
 def copytree(src, dst, symlinks=False):  
@@ -17,7 +18,7 @@ def copytree(src, dst, symlinks=False):
           
     errors = []  
     for name in names:  
-        srcname = os.path.join(src, name)  
+        srcname = os.path.join(src, name)
         dstname = os.path.join(dst, name)  
         try:  
             if symlinks and os.path.islink(srcname):  
@@ -56,17 +57,17 @@ def delete_file(filePath):
     else:
         return "no filepath"
 if __name__ == '__main__':  
-    # copytree('./build/openData/', './build/wechatgame/')
-    # delete_file('./build/res/')
+    # copytree('/Users/Innotech/Desktop/MZGame/MZGame2.0.0/MZGame/build/openData/', '/Users/Innotech/Desktop/MZGame/MZGame2.0.0/MZGame/build/wechatgame/')
+    # delete_file('/Users/Innotech/Desktop/MZGame/MZGame2.0.0/MZGame/build/res/')
     print('--------------delete   res   ok ---------')
-    # copytree('./build/wechatgame/res/', './build/res')
+    # copytree('/Users/Innotech/Desktop/MZGame/MZGame2.0.0/MZGame/build/wechatgame/res/', '/Users/Innotech/Desktop/MZGame/MZGame2.0.0/MZGame/build/res')
     # print('--------------copy res ok----------')
     
 
-    # delete_file('./build/wechatgame/res/')
-    print('--------------copy res to build ok ---------')
+    # delete_file('/Users/Innotech/Desktop/MZGame/MZGame2.0.0/MZGame/build/wechatgame/res/')
+    # print('--------------copy res to build ok ---------')
     # 3.auto publish wechat game
-    #os.system('/Applications/wechatwebdevtools.app/Contents/MacOS/cli -u 1.0.0@//Users/Innotech/Desktop/MZGame/castles/BattleCastles/build/wechatgame --upload-desc "upload publish  version1.0.0"')
+    # os.system('/Applications/wechatwebdevtools.app/Contents/MacOS/cli -u 1.0.0@/Users/Innotech/Desktop/MZGame/MZGame2.0.0/MZGame/build/wechatgame --upload-desc "upload publish 2.0.0"')
     print('--------------copy  upload sucess  ---------')
 
 

@@ -4,8 +4,8 @@ import shutil
 import stat
 # import oss2
 
-#1.cocos creator complie Wechat Game to Wechat_devtoolsWebPack_Demo/     python publish_web.py
-os.system('/Applications/CocosCreator2.2.0.app/Contents/MacOS/CocosCreator --path ../BattleCastles/ --build "platform=web-mobile;debug=false;md5Cache=true;zipCompressJs=true;appid=wx6ac3f5090a6b99c5;orientation=landscape"');
+#1.cocos creator complie Wechat Game to Wechat_devtoolsWebPack_Demo/     python tool/publish_web.py
+os.system('/Applications/CocosCreator2.2.0.app/Contents/MacOS/CocosCreator --path ./ --build "platform=web-mobile;debug=false;md5Cache=true;zipCompressJs=true;appid=wx6ac3f5090a6b99c5;orientation=landscape"');
 
 os.system('gulp tinypngWeb')
 

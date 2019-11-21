@@ -1,0 +1,24 @@
+import { HttpNet } from "./HttpNetManager";
+import { NetUrlConstants } from "./NetUrlConstants";
+import { handler, UT } from "../util/UtilTool";
+
+/*
+ * @Author: Yang Huan 
+ * @Date: 2019-11-21 17:36:59 
+ * @Last Modified by: Yang Huan
+ * @Last Modified time: 2019-11-21 17:43:33
+ * 网络请求
+ */
+export class HttpNetRequest {
+
+    static getPerformanceNow() {
+        UT.log('---1111---')
+        return new Promise((resolve: Function, reject: Function) => {
+            if (cc.sys.isNative) {
+                HttpNet.doGet(NetUrlConstants.now_url, {}, resolve, reject)
+            }
+        })
+    }
+
+
+}

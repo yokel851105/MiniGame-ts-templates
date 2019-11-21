@@ -5,8 +5,10 @@ let gulp = require("gulp"),
     tinypngAnroid = require('gulp-tinypng-compress'),       //压缩图片2 需要有KEY,
     tinypng_nokey = require('gulp-tinypng-nokey'),   //压缩图片3 免费
     concat = require('gulp-concat'),
-    uglify = require('gulp-uglify');
-// runSequence = require('run-sequence');
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    excel2json = require('gulp-excel2json'),
+    runSequence = require('gulp-sequence');
 
 
 //图片压缩1(感觉压缩程度不够)
@@ -84,7 +86,7 @@ gulp.task('copy-allJS', function () {
     return new Promise((resolve, reject) => {
         gulp.src('./assets/**/*.ts')
             .pipe(concat('allCode.ts'))
-            // .pipe(uglify())            //压缩
+            .pipe(uglify())            //压缩
             .pipe(gulp.dest('./code/'))
         resolve();
     })
@@ -97,16 +99,31 @@ gulp.task('copy', function () {
         .pipe(gulp.dest('./code/'))
 });
 
+//excel2json
+gulp.task('excel2json', function () {
+    return gulp.src('config/**.xlsx')
+        .pipe(excel2json({
+            headRow: 1,
+            valueRowStart: 3,
+            trace: true
+        }))
+        .pipe(rename(function (path) {
+            path.extname = ".json";
+        }))
+        // .pipe(concat('Config.json'))
+        .pipe(gulp.dest('./plugin-resource/json/'))
+});
 
-// gulp.task('build', function (done) {
-//     return new Promise((resolve, reject) => {
-//         condition = false;
-//         runSequence(
-//             'compress_img',
-//             'tinypng',
-//             'tinypngWx',
-//             'tp',
-//             done);
-//         resolve();
-//     })
-// });
+
+
+
+
+gulp.task('build', function (done) {
+    return new Promise((resolve, reject) => {
+        runSequence(
+            'tinypngWeb',
+            'tinypngAnroid',
+            'tinypngWx');
+        resolve();
+    })
+});

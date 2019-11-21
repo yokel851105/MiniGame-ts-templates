@@ -14,7 +14,7 @@ window.i18n.languages['en'] = {
         changeLang: 'en',
         openUI:'open UI',
         event:'test event',
-        customEvent:'test customEvent',
+        customEvent:' en test customEvent',
     }
 
     // write your key value pairs here

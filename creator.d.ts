@@ -7174,7 +7174,8 @@ declare namespace cc {
 	}	
 	/** !#en The Label Component.
 	!#zh 文字标签组件 */
-	export class Label extends RenderComponent {		
+	export class Label extends RenderComponent {
+        [x: string]: any;		
 		/** !#en Content string of label.
 		!#zh 标签显示的文本内容。 */
 		string: string;		
