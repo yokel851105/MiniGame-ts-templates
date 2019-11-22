@@ -15740,7 +15740,7 @@ declare namespace dragonBones {
 	/** !#en
 	The Armature Display of DragonBones <br/>
 	<br/>
-	(Armature Display has a reference to a DragonBonesAsset and stores the state for ArmatureDisplay instance,
+	(Armature Display has a reference to a DragonBonesAsset and stores the state for DragonBonesAsset instance,
 	which consists of the current pose's bone SRT, slot colors, and which slot attachments are visible. <br/>
 	Multiple Armature Display can use the same DragonBonesAsset which includes all animations, skins, and attachments.) <br/>
 	!#zh

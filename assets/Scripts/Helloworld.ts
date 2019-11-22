@@ -3,6 +3,7 @@ import { EventMng } from "./framework/messenger/EventManager";
 import { EventName } from "./framework/messenger/EventName";
 import { UT } from "./framework/util/UtilTool";
 import { HttpNetRequest } from "./framework/net/HttpNetRequest";
+import { MiniGame } from "./channel/miniPlatform/MiniGame";
 const i18n = require('LanguageData');
 
 const { ccclass, property } = cc._decorator;
@@ -19,6 +20,11 @@ export default class Helloworld extends cc.Component {
 
     @property(cc.Node)
     testUi: cc.Node = null;
+
+    onLoad() {
+        MiniGame.getCurMini();
+        MiniGame.initPlatform();
+    }
 
     onEnable() {
         EventMng.addEventListener(EventName.testEvent, this.testUI, this);
@@ -46,16 +52,24 @@ export default class Helloworld extends cc.Component {
         this.getPerformanceNow(() => {
             UT.log('-----getPerformanceNow------')
         })
+        UT.jsonLog('touchBtnEvent  ' + MiniGame.name);
+
+        UT.log('-----getPerformanceNow-MiniGame.getAllName()-----' + JSON.stringify(MiniGame.getAllName()));
+
     }
 
-    getPerformanceNow(cb) {
+    share(){
+        MiniGame.share();
+    }
+
+    getPerformanceNow(cb: any) {
         HttpNetRequest.getPerformanceNow().then((res: any) => {
             cb(res);
             UT.jsonLog(res)
             UT.log('---------' + res.data);
 
         }).catch((res) => {
-            // UtilTool.jsonLog(res, ' checkoutVersion  ');
+            UT.jsonLog(res, ' getPerformanceNow error  ');
         })
     }
 }

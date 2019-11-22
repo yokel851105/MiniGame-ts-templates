@@ -1,4 +1,6 @@
-
+/**
+ * 
+ */
 export class NetUrlConstants {
     static isDebug: boolean = true;
     static betaUrl: string = 'https://www.onemorejoy.com/minigame/battlecastle/wx/';

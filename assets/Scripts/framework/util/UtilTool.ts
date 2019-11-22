@@ -2,7 +2,7 @@
  * @Author: Yang Huan 
  * @Date: 2019-11-19 18:18:36 
  * @Last Modified by: Yang Huan
- * @Last Modified time: 2019-11-21 16:35:39
+ * @Last Modified time: 2019-11-22 10:38:24
  * 工具类
  */
 const i18n = require('LanguageData');
@@ -22,7 +22,7 @@ export class UtilTool {
     log(str: string, ...params: any) {
         if (this.isPrint) {
             let arr = []
-            params.forEach(function (item) {  ////将items的每一项push进array
+            params.forEach(function (item: any) {  ////将items的每一项push进array
                 let arr = []
                 arr.push('  -------   ' + item);
             });
@@ -35,7 +35,7 @@ export class UtilTool {
             console.log(this.gameName + ' -----' + tagStr + JSON.stringify(str));
         }
     }
-    
+
     // this.label.textKey = i18n.t('sprite_loadRes_asset_failed');
     changeLabeli18n(lable: cc.Label, lableKey: string, baseKey = true): void {
         let labelBaseKey = '';

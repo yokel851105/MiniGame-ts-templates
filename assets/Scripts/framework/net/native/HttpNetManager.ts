@@ -1,11 +1,11 @@
-import { handler, UT } from "../util/UtilTool";
-import { NetUrlConstants } from "./NetUrlConstants";
+import { NetUrlConstants } from "../NetUrlConstants";
+import { UT } from "../../util/UtilTool";
 
 /*
  * @Author: Yang Huan 
  * @Date: 2019-11-20 14:19:39 
  * @Last Modified by: Yang Huan
- * @Last Modified time: 2019-11-21 17:39:06
+ * @Last Modified time: 2019-11-22 10:48:23
  *    native net 
  */
 
@@ -27,7 +27,7 @@ export class HttpNetManager {
         return this._instance;
     }
 
-    //handler
+    //
     doGet(url: string, params: any, resolve: Function, reject: Function, headers?: any, ) {
         if (params) {
             if (url.indexOf('?') == -1) {
@@ -42,14 +42,14 @@ export class HttpNetManager {
         this.doHttp(url, params, "POST", resolve, reject, headers);
     }
 
-    private doHttp(url: string, params: any, method: string, resolve: Function, reject?: Function, headers?: any, ) {
+    private doHttp(url: string, params: any, method: string, resolve: Function, reject?: Function, headers?: any) {
         let baseUrl = NetUrlConstants.isDebug ? NetUrlConstants.webetaUrl : NetUrlConstants.betaUrl;
         baseUrl = baseUrl.replace(/^\s+|\s+$/g, "");
         url = baseUrl + url + "?time=" + Date.parse(new Date().toString());
 
         const xhr = new XMLHttpRequest();
         xhr.responseType = 'text';
-        xhr.onreadystatechange = this.onreadystatechange.bind(this, xhr, resolve);
+        xhr.onreadystatechange = this.onreadystatechange.bind(this, xhr, resolve, reject);
         xhr.ontimeout = this.onTimeout.bind(this, xhr, url);
         xhr.onerror = this.onError.bind(this, xhr, url);
         xhr.onabort = this.onAbort.bind(this, xhr, url);
@@ -82,11 +82,11 @@ export class HttpNetManager {
             if (response) {
                 code = HttpCode.kSuccess;
                 data = JSON.parse(xhr.responseText);
+                this.notifyCallback(resolve, code, data);
+            } else {
+                reject(response);
             }
-            this.notifyCallback(resolve, code, data);
             this.removeXhrEvent(xhr);
-        } else {
-            reject(JSON.stringify(xhr.responseText));
         }
     }
 
