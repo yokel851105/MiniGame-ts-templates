@@ -32,6 +32,7 @@ export class WxMini extends MiniApp {
         super(name);
         this.log('---------WxMini----------')
     }
+
     init(): any {
         this.log(`${this.name}-----init------`)
         this.onShow();
@@ -39,6 +40,23 @@ export class WxMini extends MiniApp {
         this.showShareMenu();
         this.preloadBannerAd();
         this.proLoadVideo();
+    }
+    login() {
+        return new Promise((resolve, reject) => {
+            wx.login({
+                success: (res) => {
+
+                    let code = res.code;
+                    this.log("res.code " + code);
+                    this.doPost(NetUrlConstants.login_url, {
+                        code: code,
+                    }, resolve, reject)
+                },
+                fail: (res) => {
+                    reject(res);
+                }
+            })
+        })
     }
 
     updataVersion(): void {
@@ -222,6 +240,7 @@ export class WxMini extends MiniApp {
             method: method,
             data: params,
             success: function (res) {
+                console.log(JSON.stringify(res.data))
                 resolve(res.data)
             },
             fail: function (res) {
@@ -349,7 +368,6 @@ export class WxMini extends MiniApp {
         videoAd.onClose(res => {
             // 用户点击了【关闭广告】按钮
             // 小于 2.1.0 的基础库版本，res 是一个 undefined\
-
             if (res && res.isEnded || res === undefined) {
                 // 正常播放结束，可以下发游戏奖励
                 videoAd.offClose();
@@ -360,7 +378,6 @@ export class WxMini extends MiniApp {
 
                 cb = null;
                 this.loadVideoAd(index, VideoAdUnitId[index]);
-
             }
             else {
                 // 播放中途退出，不下发游戏奖励
@@ -371,7 +388,6 @@ export class WxMini extends MiniApp {
                 this.loadVideoAd(index, VideoAdUnitId[index]);
                 // GameEvent.instance().dispatchCustomEvent(EventName.EName.SHOW_TIPS, {message: '广告未看完无法领取奖励'});
             }
-
         })
 
         videoAd.onError(err => {

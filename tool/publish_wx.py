@@ -5,7 +5,7 @@ import stat
 # import oss2
 
 #1.cocos creator complie Wechat Game to Wechat_devtoolsWebPack_Demo/     python tool/publish_wx.py          eAUNEwS03n02Ms0orufoFBFMF2RarwoN  Hdow30XfbJBkLWjRZaitoc9hGVtKKTLN
-os.system('/Applications/CocosCreator2.2.0.app/Contents/MacOS/CocosCreator --path ./ --build "platform=wechatgame;debug=false;md5Cache=true;appid=wxb93b1ad68145d0a7;orientation=landscape"');
+os.system('/Applications/CocosCreator2.2.1.app/Contents/MacOS/CocosCreator --path ./ --build "platform=wechatgame;debug=false;md5Cache=true;appid=wxb93b1ad68145d0a7;orientation=landscape"');
 
 #os.system('gulp tinypngWx')
 

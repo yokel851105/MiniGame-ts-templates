@@ -24,6 +24,10 @@ export default class Helloworld extends cc.Component {
     onLoad() {
         MiniGame.getCurMini();
         MiniGame.initPlatform();
+        cc.loader.load({ url: 'https://miaozhang.oss-cn-beijing.aliyuncs.com/0res/notice.json', type: 'json' }, function (err, jsonAsset) {
+            UT.log('---------notice--------')
+            UT.jsonLog(jsonAsset.json);
+        });
     }
 
     onEnable() {
@@ -57,11 +61,6 @@ export default class Helloworld extends cc.Component {
         UT.log('-----getPerformanceNow-MiniGame.getAllName()-----' + JSON.stringify(MiniGame.getAllName()));
 
     }
-
-    share(){
-        MiniGame.share();
-    }
-
     getPerformanceNow(cb: any) {
         HttpNetRequest.getPerformanceNow().then((res: any) => {
             cb(res);
@@ -71,5 +70,13 @@ export default class Helloworld extends cc.Component {
         }).catch((res) => {
             UT.jsonLog(res, ' getPerformanceNow error  ');
         })
+    }
+    share() {
+
+        MiniGame.share();
+    }
+
+    login() {
+        MiniGame.login();
     }
 }

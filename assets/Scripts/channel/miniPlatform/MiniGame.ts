@@ -96,6 +96,15 @@ export class MiniGame {
         this.miniPFArr[this.curMin].addRewardedVideoAd(index, cb);
     }
 
+    static login() {
+        this.miniPFArr[this.curMin].login().then((res) => {
+            console.log('openId = ', res.data.openId)
+        }).catch((res) => {
+
+        })
+    }
+
+
 }
 
 // cc.game.once(cc.game.EVENT_ENGINE_INITED, () => {
